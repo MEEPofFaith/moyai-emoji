@@ -1,9 +1,9 @@
-package template;
+package moai;
 
 import mindustry.mod.*;
-import template.gen.*;
+import moai.gen.*;
 
-public class ModTemplate extends Mod{
+public class Moai extends Mod{
     @Override
     public void loadContent(){
         EntityRegistry.register();
