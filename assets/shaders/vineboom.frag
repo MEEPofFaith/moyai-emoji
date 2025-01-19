@@ -1,28 +1,31 @@
 #define HIGHP
+#define N_SAMPLES 10
 
 uniform sampler2D u_texture;
 
 uniform vec2 u_resolution;
-uniform float u_radius;
 uniform float u_intensity;
 
 varying vec2 v_texCoords;
 
+//https://www.shadertoy.com/view/XsfSDs
 void main(){
-    if(u_radius < 0.01 || u_intensity < 0.01){
+    if(u_intensity < 0.001){
         gl_FragColor = texture2D(u_texture, v_texCoords.xy);
         return;
     }
 
-    vec2 c = v_texCoords.xy - vec2(0.5);
-    vec2 coords = vec2(c.x * u_resolution.x, c.y * u_resolution.y);
+    vec2 center = vec2(0.5);
+    vec2 c = v_texCoords.xy - center;
 
-    float offset = sqrt(coords.x * coords.x + coords.y * coords.y) / u_radius * u_intensity;
-    float ang = atan(coords.y, coords.x);
+    float precompute = u_intensity * (1.0 / float(N_SAMPLES - 1));
+    vec4 color = vec4(0.0);
+    for(int i = 0; i < N_SAMPLES; i++){
+        float scale = 1.0 + (float(i) * precompute);
+        color += texture2D(u_texture, c * scale + center);
+    }
 
-    vec2 from = coords - vec2(offset * cos(ang), offset * sin(ang));
-    from /= u_resolution;
-    from += 0.5;
+    color /= float(N_SAMPLES);
 
-    gl_FragColor = texture2D(u_texture, from.xy);
+    gl_FragColor = color;
 }

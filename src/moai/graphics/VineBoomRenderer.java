@@ -8,13 +8,12 @@ import arc.util.*;
 import mindustry.*;
 import mindustry.game.EventType.*;
 import mindustry.graphics.*;
-import moai.graphics.MShaders.*;
 
 import static arc.Core.graphics;
 
 public class VineBoomRenderer{
-    private float boomRadius, boomIntensity,
-        boomRadiusReduction, boomIntensityReduction,
+    private float boomIntensity,
+        boomReduction,
         boomTime;
 
     private final FrameBuffer buffer;
@@ -27,20 +26,16 @@ public class VineBoomRenderer{
         Events.run(Trigger.draw, this::draw);
     }
 
-    public void boom(float radius, float intensity, float duration){
-        boomRadius = Math.max(boomRadius, radius);
+    public void boom(float intensity, float duration){
         boomIntensity = Math.max(boomIntensity, Mathf.clamp(intensity, 0, 1));
         boomTime = Math.max(boomTime, duration);
-        boomRadiusReduction = boomRadius / boomTime;
-        boomIntensityReduction = boomIntensity / boomTime;
+        boomReduction = boomIntensity / boomTime;
     }
 
     private void update(){
         if(!Vars.state.isPaused() && boomTime > 0){
-            boomRadius -= boomRadiusReduction * Time.delta;
-            boomIntensity -= boomIntensityReduction * Time.delta;
+            boomIntensity -= boomReduction * Time.delta;
             boomTime -= Time.delta;
-            boomRadius = Math.max(boomRadius, 0f);
             boomIntensity = Mathf.clamp(boomIntensity, 0f, 1f);
         }
     }
@@ -53,7 +48,6 @@ public class VineBoomRenderer{
 
         Draw.draw(Layer.max - 6, () -> {
             buffer.end();
-            MShaders.vineBoomShader.radius = boomRadius;
             MShaders.vineBoomShader.intensity = boomIntensity;
             buffer.blit(MShaders.vineBoomShader);
         });

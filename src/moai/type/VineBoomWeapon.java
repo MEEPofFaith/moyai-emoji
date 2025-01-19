@@ -7,8 +7,7 @@ import mindustry.type.*;
 import moai.*;
 
 public class VineBoomWeapon extends Weapon{
-    public float boomRadius = 16f,
-        boomIntensity = 0.75f,
+    public float boomIntensity = 0.3f,
         boomDuration = 60f;
 
     public VineBoomWeapon(String name){
@@ -25,6 +24,6 @@ public class VineBoomWeapon extends Weapon{
 
         super.bullet(unit, mount, xOffset, yOffset, angleOffset, mover);
 
-        Moai.mRenderer.boom(boomRadius, boomIntensity, boomDuration);
+        Moai.mRenderer.boom(boomIntensity, boomDuration);
     }
 }

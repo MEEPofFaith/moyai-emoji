@@ -24,8 +24,8 @@ public class MShaders{
         @Override
         public void apply(){
             setUniformf("u_resolution", graphics.getWidth(), graphics.getHeight());
-            setUniformf("u_radius", radius);
-            setUniformf("u_intensity", intensity);
+            setUniformf("u_radius", radius * renderer.getDisplayScale());
+            setUniformf("u_intensity", intensity * renderer.getDisplayScale());
         }
     }
 
