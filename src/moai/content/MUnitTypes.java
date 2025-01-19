@@ -1,5 +1,6 @@
 package moai.content;
 
+import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.type.*;
@@ -15,11 +16,15 @@ public class MUnitTypes{
                 bullet = new ExplosionBulletType(100000, 50 * 8){{
                     killShooter = false;
                     splashDamagePierce = true;
+
+                    shootEffect = smokeEffect = Fx.none;
                 }};
 
                 reload = 20;
                 x = y = shootX = shootY = 0f;
                 shootCone = 180f;
+
+                shootSound = MSounds.boom;
             }});
 
             flying = false;

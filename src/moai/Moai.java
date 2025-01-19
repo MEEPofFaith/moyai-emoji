@@ -1,5 +1,7 @@
 package moai;
 
+import arc.*;
+import mindustry.game.EventType.*;
 import mindustry.mod.*;
 import moai.content.*;
 import moai.gen.*;
@@ -9,6 +11,10 @@ import static mindustry.Vars.headless;
 
 public class Moai extends Mod{
     public static VineBoomRenderer mRenderer;
+
+    public Moai(){
+        Events.on(FileTreeInitEvent.class, e -> Core.app.post(MSounds::load));
+    }
 
     @Override
     public void init(){
