@@ -5,6 +5,7 @@ import arc.graphics.g2d.*;
 import arc.graphics.gl.*;
 import arc.math.*;
 import arc.util.*;
+import mindustry.*;
 import mindustry.game.EventType.*;
 import mindustry.graphics.*;
 import moai.graphics.MShaders.*;
@@ -12,7 +13,9 @@ import moai.graphics.MShaders.*;
 import static arc.Core.graphics;
 
 public class VineBoomRenderer{
-    private float boomIntensity, boomReduction, boomTime;
+    private float boomRadius, boomIntensity,
+        boomRadiusReduction, boomIntensityReduction,
+        boomTime;
 
     private final FrameBuffer buffer;
 
@@ -21,20 +24,24 @@ public class VineBoomRenderer{
         buffer = new FrameBuffer();
 
         Events.run(Trigger.update, this::update);
-        Events.run(Trigger.preDraw, this::draw);
+        Events.run(Trigger.draw, this::draw);
     }
 
-    public void boom(float intensity, float duration){
-        boomIntensity = Math.max(boomIntensity, Mathf.clamp(intensity, 0, 100));
+    public void boom(float radius, float intensity, float duration){
+        boomRadius = Math.max(boomRadius, radius);
+        boomIntensity = Math.max(boomIntensity, Mathf.clamp(intensity, 0, 1));
         boomTime = Math.max(boomTime, duration);
-        boomReduction = boomIntensity / boomTime;
+        boomRadiusReduction = boomRadius / boomTime;
+        boomIntensityReduction = boomIntensity / boomTime;
     }
 
     private void update(){
-        if(boomTime > 0){
-            boomIntensity -= boomReduction * Time.delta;
+        if(!Vars.state.isPaused() && boomTime > 0){
+            boomRadius -= boomRadiusReduction * Time.delta;
+            boomIntensity -= boomIntensityReduction * Time.delta;
             boomTime -= Time.delta;
-            boomIntensity = Mathf.clamp(boomIntensity, 0f, 100f);
+            boomRadius = Math.max(boomRadius, 0f);
+            boomIntensity = Mathf.clamp(boomIntensity, 0f, 1f);
         }
     }
 
@@ -46,6 +53,7 @@ public class VineBoomRenderer{
 
         Draw.draw(Layer.max - 6, () -> {
             buffer.end();
+            MShaders.vineBoomShader.radius = boomRadius;
             MShaders.vineBoomShader.intensity = boomIntensity;
             buffer.blit(MShaders.vineBoomShader);
         });

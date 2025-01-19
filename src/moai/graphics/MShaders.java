@@ -14,15 +14,17 @@ public class MShaders{
     }
 
     public static class VineBoomShader extends MLoadShader{
+        public float radius;
         public float intensity;
 
         public VineBoomShader(){
-            super("screenspace", "vine-boom");
+            super("screenspace", "vineboom");
         }
 
         @Override
         public void apply(){
             setUniformf("u_resolution", graphics.getWidth(), graphics.getHeight());
+            setUniformf("u_radius", radius);
             setUniformf("u_intensity", intensity);
         }
     }

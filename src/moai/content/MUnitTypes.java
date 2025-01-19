@@ -19,10 +19,11 @@ public class MUnitTypes{
 
                 reload = 20;
                 x = y = shootX = shootY = 0f;
-
-                boomIntensity = 64f;
-                boomDuration = 60f;
+                shootCone = 180f;
             }});
+
+            flying = false;
+            strafePenalty = 0f;
         }});
     }
 }
