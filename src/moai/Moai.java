@@ -7,11 +7,11 @@ import moai.graphics.*;
 import static mindustry.Vars.headless;
 
 public class Moai extends Mod{
+    VineBoomRenderer mRenderer;
+
     @Override
     public void init(){
-        if(!headless){
-            MShaders.init();
-        }
+        mRenderer = new VineBoomRenderer();
     }
 
     @Override
