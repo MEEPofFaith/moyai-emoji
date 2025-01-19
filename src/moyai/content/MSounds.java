@@ -1,4 +1,4 @@
-package moai.content;
+package moyai.content;
 
 import arc.audio.*;
 import mindustry.*;

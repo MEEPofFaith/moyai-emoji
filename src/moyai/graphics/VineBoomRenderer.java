@@ -1,4 +1,4 @@
-package moai.graphics;
+package moyai.graphics;
 
 import arc.*;
 import arc.graphics.g2d.*;

@@ -1,11 +1,11 @@
-package moai.content;
+package moyai.content;
 
 import mindustry.content.*;
 import mindustry.entities.bullet.*;
 import mindustry.gen.*;
 import mindustry.type.*;
-import moai.gen.*;
-import moai.type.*;
+import moyai.gen.*;
+import moyai.type.*;
 
 public class MUnitTypes{
     public static UnitType moyai;
@@ -16,6 +16,7 @@ public class MUnitTypes{
                 bullet = new ExplosionBulletType(100000, 50 * 8){{
                     killShooter = false;
                     splashDamagePierce = true;
+                    collidesAir = true;
 
                     shootEffect = smokeEffect = Fx.none;
                 }};

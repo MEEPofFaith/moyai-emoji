@@ -1,10 +1,10 @@
-package moai.type;
+package moyai.type;
 
 import mindustry.entities.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.type.*;
-import moai.*;
+import moyai.*;
 
 public class VineBoomWeapon extends Weapon{
     public float boomIntensity = 0.2f,
@@ -24,6 +24,6 @@ public class VineBoomWeapon extends Weapon{
 
         super.bullet(unit, mount, xOffset, yOffset, angleOffset, mover);
 
-        Moai.mRenderer.boom(boomIntensity, boomDuration);
+        Moyai.mRenderer.boom(boomIntensity, boomDuration);
     }
 }

@@ -1,18 +1,16 @@
-package moai;
+package moyai;
 
 import arc.*;
 import mindustry.game.EventType.*;
 import mindustry.mod.*;
-import moai.content.*;
-import moai.gen.*;
-import moai.graphics.*;
+import moyai.content.*;
+import moyai.gen.*;
+import moyai.graphics.*;
 
-import static mindustry.Vars.headless;
-
-public class Moai extends Mod{
+public class Moyai extends Mod{
     public static VineBoomRenderer mRenderer;
 
-    public Moai(){
+    public Moyai(){
         Events.on(FileTreeInitEvent.class, e -> Core.app.post(MSounds::load));
     }
 

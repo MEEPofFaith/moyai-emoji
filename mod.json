@@ -5,5 +5,5 @@
     "minGameVersion": "146",
     "author": "MEEPofFaith",
     "java": true,
-    "main": "moai.Moai"
+    "main": "moyai.Moyai"
 }

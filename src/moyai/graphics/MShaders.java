@@ -1,6 +1,5 @@
-package moai.graphics;
+package moyai.graphics;
 
-import arc.*;
 import arc.graphics.gl.*;
 
 import static arc.Core.*;
