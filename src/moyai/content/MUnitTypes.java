@@ -11,14 +11,14 @@ public class MUnitTypes{
     public static UnitType moyai;
 
     public static void load(){
-        moyai = EntityRegistry.content("moyai", UnitEntity.class, name -> new UnitType(name){{
+        moyai = EntityRegistry.content("moyai", ScrapeUnit.class, name -> new UnitType(name){{
             weapons.add(new VineBoomWeapon(){{
                 bullet = new ExplosionBulletType(100000, 50 * 8){{
                     killShooter = false;
                     splashDamagePierce = true;
                     collidesAir = true;
 
-                    shootEffect = smokeEffect = Fx.none;
+                    shootEffect = smokeEffect = hitEffect = Fx.none;
                 }};
 
                 reload = 20;
@@ -30,6 +30,8 @@ public class MUnitTypes{
 
             flying = false;
             strafePenalty = 0f;
+
+            drag = 0.05f;
         }});
     }
 }
