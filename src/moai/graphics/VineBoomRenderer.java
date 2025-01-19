@@ -14,10 +14,11 @@ import static arc.Core.graphics;
 public class VineBoomRenderer{
     private float boomIntensity, boomReduction, boomTime;
 
-    private FrameBuffer buffer;
+    private final FrameBuffer buffer;
 
     public VineBoomRenderer(){
         MShaders.init();
+        buffer = new FrameBuffer();
 
         Events.run(Trigger.update, this::update);
         Events.run(Trigger.preDraw, this::draw);
