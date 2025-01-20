@@ -9,14 +9,16 @@ import mindustry.*;
 import mindustry.game.EventType.*;
 import mindustry.graphics.*;
 
-import static arc.Core.graphics;
+import static arc.Core.*;
 
 public class VineBoomRenderer{
     private float boomIntensity,
         boomReduction,
         boomTime;
-
+    private float rockAlpha,
+        rockReduction;
     private final FrameBuffer buffer;
+    private TextureRegion rock = null;
 
     public VineBoomRenderer(){
         MShaders.init();
@@ -30,13 +32,17 @@ public class VineBoomRenderer{
         boomIntensity = Math.max(boomIntensity, Mathf.clamp(intensity, 0, 1));
         boomTime = Math.max(boomTime, duration);
         boomReduction = boomIntensity / boomTime;
+        rockAlpha = 0.25f;
+        rockReduction = rockAlpha / boomTime;
     }
 
     private void update(){
         if(!Vars.state.isPaused() && boomTime > 0){
             boomIntensity -= boomReduction * Time.delta;
+            rockAlpha -= rockReduction * Time.delta;
             boomTime -= Time.delta;
             boomIntensity = Mathf.clamp(boomIntensity, 0f, 1f);
+            rockAlpha = Mathf.clamp(rockAlpha, 0f, 1f);
         }
     }
 
@@ -50,6 +56,13 @@ public class VineBoomRenderer{
             buffer.end();
             MShaders.vineBoomShader.intensity = boomIntensity;
             buffer.blit(MShaders.vineBoomShader);
+
+            if(rock == null) rock = Core.atlas.find("vine-boom-moyai-emoji");
+
+            Draw.alpha(rockAlpha);
+            float scl = 400 / Vars.renderer.getDisplayScale();
+            Draw.rect(rock, camera.position.x, camera.position.y, scl, scl);
+            Draw.color();
         });
     }
 }
