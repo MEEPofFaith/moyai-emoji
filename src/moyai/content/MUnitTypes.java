@@ -34,6 +34,7 @@ public class MUnitTypes{
             drag = 0.05f;
             faceTarget = false;
             drawCell = false;
+            outlines = false;
         }});
     }
 }
