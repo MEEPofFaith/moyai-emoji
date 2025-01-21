@@ -23,5 +23,6 @@ public class Moyai extends Mod{
     public void loadContent(){
         EntityRegistry.register();
         MUnitTypes.load();
+        MBlocks.load();
     }
 }

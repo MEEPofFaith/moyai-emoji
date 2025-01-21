@@ -21,6 +21,11 @@ public class VineBoomRenderer{
     private TextureRegion rock = null;
 
     public VineBoomRenderer(){
+        if(Vars.headless){
+            buffer = null;
+            return;
+        }
+
         MShaders.init();
         buffer = new FrameBuffer();
 
@@ -47,6 +52,8 @@ public class VineBoomRenderer{
     }
 
     private void draw(){
+        if(Vars.headless) return;
+
         Draw.draw(Layer.background - 0.1f, () -> {
             buffer.resize(graphics.getWidth(), graphics.getHeight());
             buffer.begin();
