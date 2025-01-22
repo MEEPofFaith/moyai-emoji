@@ -18,7 +18,7 @@ public class VineBoomRenderer{
     private float rockAlpha,
         rockReduction;
     private final FrameBuffer buffer;
-    public RockType rockType = RockType.moyai;
+    public RockType rockType = RockType.boulder;
 
     public VineBoomRenderer(){
         if(Vars.headless){
@@ -65,15 +65,16 @@ public class VineBoomRenderer{
             buffer.blit(MShaders.vineBoomShader);
 
             Draw.alpha(rockAlpha);
+            TextureRegion region = rockType.splashRegion();
             float scl = 400 / Vars.renderer.getDisplayScale();
-            Draw.rect(rockType.splashRegion(), camera.position.x, camera.position.y, scl, scl);
+            Draw.rect(region, camera.position.x, camera.position.y, scl, (float)region.height / region.width * scl);
             Draw.color();
         });
     }
 
     public enum RockType{
         moyai("vine-boom-moyai", "vine-boom-moyai-emoji"),
-        original("boulder2", "vine-boom-animboulder"),
+        boulder("boulder2", "vine-boom-animboulder"),
         maurice("vine-boom-maurice", "vine-boom-machine-i-have-taken-a-selfie-with-the-funny-rock");
 
         private final String sprite, splash;
