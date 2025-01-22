@@ -15,7 +15,7 @@ import moyai.graphics.VineBoomRenderer.*;
 
 public class MSettings{
     public static void init(){
-        Vars.ui.settings.graphics.pref(new RockSelection("rocktype", RockType.moyai));
+        Vars.ui.settings.graphics.pref(new RockSelection("vine-boom-rocktype", RockType.moyai));
     }
 
     private static class RockSelection extends Setting{

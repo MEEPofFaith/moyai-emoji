@@ -11,7 +11,7 @@ public class MUnitTypes{
     public static RockUnitType moyai;
 
     public static void load(){
-        moyai = EntityRegistry.content("moyai", ScrapeUnit.class, name -> new RockUnitType(name){{
+        moyai = EntityRegistry.content("the-rock", ScrapeUnit.class, name -> new RockUnitType(name){{
             weapons.add(new VineBoomWeapon(){{
                 bullet = new ExplosionBulletType(100000000, 50 * 8){{
                     killShooter = false;
