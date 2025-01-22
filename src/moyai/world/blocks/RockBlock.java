@@ -1,9 +1,13 @@
 package moyai.world.blocks;
 
 import arc.*;
+import arc.graphics.g2d.*;
+import arc.util.*;
 import mindustry.content.*;
+import mindustry.entities.units.*;
 import mindustry.game.*;
 import mindustry.gen.*;
+import mindustry.graphics.*;
 import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
@@ -24,10 +28,17 @@ public class RockBlock extends Block{
         destructible = true;
         createRubble = false;
         destroyEffect = Fx.none;
+        rebuildable = false;
+
+        Events.on(EventType.ClientLoadEvent.class, e -> {
+            uiIcon = spawnUnit.uiIcon;
+            fullIcon = spawnUnit.fullIcon;
+        });
     }
 
-    public RockBlock(String name){
-        this(name, null);
+    @Override
+    public TextureRegion getPlanRegion(BuildPlan plan, Eachable<BuildPlan> list){
+        return spawnUnit.fullIcon;
     }
 
     public class RockBlockBuild extends Building{
