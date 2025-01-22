@@ -18,7 +18,7 @@ public class VineBoomRenderer{
     private float rockAlpha,
         rockReduction;
     private final FrameBuffer buffer;
-    public RockType rockType = RockType.boulder;
+    public RockType rockType = RockType.all[settings.getInt("vine-boom-rocktype", 0)];
 
     public VineBoomRenderer(){
         if(Vars.headless){
@@ -67,7 +67,7 @@ public class VineBoomRenderer{
             Draw.alpha(rockAlpha);
             TextureRegion region = rockType.splashRegion();
             float scl = 400 / Vars.renderer.getDisplayScale();
-            Draw.rect(region, camera.position.x, camera.position.y, scl, (float)region.height / region.width * scl);
+            Draw.rect(region, camera.position.x, camera.position.y, scl, scl / region.ratio());
             Draw.color();
         });
     }
@@ -85,6 +85,8 @@ public class VineBoomRenderer{
         }
 
         private TextureRegion region, splashRegion;
+
+        public static final RockType[] all = values();
 
         public TextureRegion region(){
             if(region == null) region = Core.atlas.find(sprite);
