@@ -8,10 +8,10 @@ import moyai.gen.*;
 import moyai.type.*;
 
 public class MUnitTypes{
-    public static UnitType moyai;
+    public static RockUnitType moyai;
 
     public static void load(){
-        moyai = EntityRegistry.content("moyai", ScrapeUnit.class, name -> new UnitType(name){{
+        moyai = EntityRegistry.content("moyai", ScrapeUnit.class, name -> new RockUnitType(name){{
             weapons.add(new VineBoomWeapon(){{
                 bullet = new ExplosionBulletType(100000000, 50 * 8){{
                     killShooter = false;
@@ -29,12 +29,6 @@ public class MUnitTypes{
             }});
 
             health = 1000000;
-            flying = false;
-            strafePenalty = 0f;
-            drag = 0.05f;
-            faceTarget = false;
-            drawCell = false;
-            outlines = false;
         }});
     }
 }

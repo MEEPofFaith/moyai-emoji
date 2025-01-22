@@ -30,15 +30,16 @@ public class RockBlock extends Block{
         destroyEffect = Fx.none;
         rebuildable = false;
 
-        Events.on(EventType.ClientLoadEvent.class, e -> {
-            uiIcon = spawnUnit.uiIcon;
-            fullIcon = spawnUnit.fullIcon;
-        });
+        Events.on(EventType.ClientLoadEvent.class, e -> reloadIcons());
     }
 
     @Override
     public TextureRegion getPlanRegion(BuildPlan plan, Eachable<BuildPlan> list){
-        return spawnUnit.fullIcon;
+        return Moyai.mRenderer.rockType.region();
+    }
+
+    public void reloadIcons(){
+        uiIcon = fullIcon = Moyai.mRenderer.rockType.region();
     }
 
     public class RockBlockBuild extends Building{
