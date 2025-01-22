@@ -54,6 +54,7 @@ public class MSettings{
         }
 
         private void reloadRegion(){
+            Core.settings.put(name, value);
             Moyai.mRenderer.rockType = RockType.all[value];
             MUnitTypes.moyai.reloadRegions();
             MBlocks.rockBlock.reloadIcons();

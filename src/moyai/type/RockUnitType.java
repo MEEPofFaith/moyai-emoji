@@ -15,8 +15,6 @@ public class RockUnitType extends UnitType{
         faceTarget = false;
         drawCell = false;
         outlines = false;
-
-        Events.on(EventType.ClientLoadEvent.class, e -> reloadRegions());
     }
 
     public void reloadRegions(){

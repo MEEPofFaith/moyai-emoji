@@ -75,7 +75,7 @@ public class VineBoomRenderer{
     public enum RockType{
         moyai("vine-boom-moyai", "vine-boom-moyai-emoji", 400),
         boulder("boulder2", "vine-boom-animboulder", 450),
-        maurice("vine-boom-maurice", "vine-boom-machine-i-have-taken-a-selfie-with-the-funny-rock", 600);
+        maurice("vine-boom-maurice", "vine-boom-machine-i-have-taken-a-selfie-with-the-funny-rock", 650);
 
         private final String sprite, splash;
         public final int width;

@@ -29,8 +29,6 @@ public class RockBlock extends Block{
         createRubble = false;
         destroyEffect = Fx.none;
         rebuildable = false;
-
-        Events.on(EventType.ClientLoadEvent.class, e -> reloadIcons());
     }
 
     @Override
