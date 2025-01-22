@@ -38,7 +38,8 @@ public class MSettings{
             }).right();
 
             content.table(Tex.pane, l -> {
-                l.label(() -> RockType.all[value].localized()).right().width(120).wrapLabel(false); //It's funnier this way.
+                //Not wrapping makes it funnier
+                l.label(() -> RockType.all[value].localized()).right().width(120).wrapLabel(false);
             });
 
             content.button(Icon.right, () -> {
