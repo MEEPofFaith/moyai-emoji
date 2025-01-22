@@ -66,22 +66,24 @@ public class VineBoomRenderer{
 
             Draw.alpha(rockAlpha);
             TextureRegion region = rockType.splashRegion();
-            float scl = 400 / Vars.renderer.getDisplayScale();
+            float scl = rockType.width / Vars.renderer.getDisplayScale();
             Draw.rect(region, camera.position.x, camera.position.y, scl, scl / region.ratio());
             Draw.color();
         });
     }
 
     public enum RockType{
-        moyai("vine-boom-moyai", "vine-boom-moyai-emoji"),
-        boulder("boulder2", "vine-boom-animboulder"),
-        maurice("vine-boom-maurice", "vine-boom-machine-i-have-taken-a-selfie-with-the-funny-rock");
+        moyai("vine-boom-moyai", "vine-boom-moyai-emoji", 400),
+        boulder("boulder2", "vine-boom-animboulder", 450),
+        maurice("vine-boom-maurice", "vine-boom-machine-i-have-taken-a-selfie-with-the-funny-rock", 600);
 
         private final String sprite, splash;
+        public final int width;
 
-        RockType(String sprite, String splash){
+        RockType(String sprite, String splash, int width){
             this.sprite = sprite;
             this.splash = splash;
+            this.width = width;
         }
 
         private TextureRegion region, splashRegion;
