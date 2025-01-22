@@ -21,7 +21,7 @@ void main(){
     float precompute = u_intensity * (1.0 / float(N_SAMPLES - 1));
     vec4 color = vec4(0.0);
     for(int i = 0; i < N_SAMPLES; i++){
-        float scale = 1.0 + (float(i) * precompute);
+        float scale = 1.0 + (float(i - N_SAMPLES / 2) * precompute);
         color += texture2D(u_texture, c * scale + center);
     }
 
