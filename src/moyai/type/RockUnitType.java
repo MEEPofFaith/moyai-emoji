@@ -15,6 +15,7 @@ public class RockUnitType extends UnitType{
         faceTarget = false;
         drawCell = false;
         outlines = false;
+        useUnitCap = false;
     }
 
     public void reloadRegions(){
