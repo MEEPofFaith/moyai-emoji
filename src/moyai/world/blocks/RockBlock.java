@@ -12,6 +12,7 @@ import mindustry.type.*;
 import mindustry.world.*;
 import mindustry.world.meta.*;
 import moyai.*;
+import moyai.content.*;
 
 public class RockBlock extends Block{
     public UnitType spawnUnit;
@@ -29,6 +30,7 @@ public class RockBlock extends Block{
         createRubble = false;
         destroyEffect = Fx.none;
         rebuildable = false;
+        destroySound = MSounds.boom;
     }
 
     @Override
