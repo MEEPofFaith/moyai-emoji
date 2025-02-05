@@ -55,14 +55,17 @@ public class VineBoomRenderer{
         if(Vars.headless) return;
 
         Draw.draw(Layer.background - 0.1f, () -> {
+            if(!blur()) return;
             buffer.resize(graphics.getWidth(), graphics.getHeight());
             buffer.begin();
         });
 
         Draw.draw(Layer.max - 6, () -> {
-            buffer.end();
-            MShaders.vineBoomShader.intensity = boomIntensity;
-            buffer.blit(MShaders.vineBoomShader);
+            if(blur()){
+                buffer.end();
+                MShaders.vineBoomShader.intensity = boomIntensity * (settings.getInt("vine-boom-intensity", 4) / 4f);
+                buffer.blit(MShaders.vineBoomShader);
+            }
 
             Draw.alpha(rockAlpha);
             TextureRegion region = rockType.splashRegion();
@@ -70,6 +73,14 @@ public class VineBoomRenderer{
             Draw.rect(region, camera.position.x, camera.position.y, scl, scl / region.ratio());
             Draw.color();
         });
+    }
+
+    public boolean blur(){
+        return settings.getInt("vine-boom-intensity", 4) > 0;
+    }
+
+    public float intensity(){
+        return settings.getInt("vine-boom-intensity", 4) / 4f;
     }
 
     public enum RockType{
