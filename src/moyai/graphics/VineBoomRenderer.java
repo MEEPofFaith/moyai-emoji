@@ -53,7 +53,7 @@ public class VineBoomRenderer{
     }
 
     private void draw(){
-        if(Vars.headless) return;
+        if(Vars.headless || boomIntensity < 0.001f) return;
 
         Draw.draw(Layer.background - 0.1f, () -> {
             if(!blur()) return;
