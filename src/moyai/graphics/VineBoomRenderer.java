@@ -17,6 +17,7 @@ public class VineBoomRenderer{
         boomTime;
     private float rockAlpha,
         rockReduction;
+    private final float rockBorder = 32;
     private final FrameBuffer buffer;
     public RockType rockType = RockType.all[settings.getInt("vine-boom-rocktype", 0)];
 
@@ -63,14 +64,21 @@ public class VineBoomRenderer{
         Draw.draw(Layer.max - 6, () -> {
             if(blur()){
                 buffer.end();
-                MShaders.vineBoomShader.intensity = boomIntensity * (settings.getInt("vine-boom-intensity", 4) / 4f);
+                MShaders.vineBoomShader.intensity = boomIntensity * intensity();
                 buffer.blit(MShaders.vineBoomShader);
             }
 
             Draw.alpha(rockAlpha);
             TextureRegion region = rockType.splashRegion();
-            float scl = rockType.width / Vars.renderer.getDisplayScale();
-            Draw.rect(region, camera.position.x, camera.position.y, scl, scl / region.ratio());
+            float rWidth = region.width, rHeight = region.height;
+            float sWidth = graphics.getWidth() - 2 * rockBorder,
+                sHeight = graphics.getHeight() - 2 * rockBorder;
+            float targetRatio = sHeight / sWidth;
+            float sourceRatio = rHeight / rWidth;
+            float scale = targetRatio > sourceRatio ? sWidth / rWidth : sHeight / rHeight;
+            rWidth *= scale / Vars.renderer.getDisplayScale();
+            rHeight *= scale / Vars.renderer.getDisplayScale();
+            Draw.rect(region, camera.position.x, camera.position.y, rWidth, rHeight);
             Draw.color();
         });
     }
@@ -84,17 +92,15 @@ public class VineBoomRenderer{
     }
 
     public enum RockType{
-        moyai("vine-boom-moyai", "vine-boom-moyai-emoji", 400),
-        boulder("boulder2", "vine-boom-animboulder", 450),
-        maurice("vine-boom-maurice", "vine-boom-machine-i-have-taken-a-selfie-with-the-funny-rock", 650);
+        moyai("vine-boom-moyai", "vine-boom-moyai-emoji"),
+        boulder("boulder2", "vine-boom-animboulder"),
+        maurice("vine-boom-maurice", "vine-boom-machine-i-have-taken-a-selfie-with-the-funny-rock");
 
         private final String sprite, splash;
-        public final int width;
 
-        RockType(String sprite, String splash, int width){
+        RockType(String sprite, String splash){
             this.sprite = sprite;
             this.splash = splash;
-            this.width = width;
         }
 
         private TextureRegion region, splashRegion;
