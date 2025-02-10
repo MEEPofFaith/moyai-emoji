@@ -21,7 +21,7 @@ public class MUnitTypes{
                     shootEffect = smokeEffect = hitEffect = despawnEffect = Fx.none;
                 }};
 
-                reload = 20;
+                reload = 30;
                 x = y = shootX = shootY = 0f;
                 shootCone = 180f;
 
